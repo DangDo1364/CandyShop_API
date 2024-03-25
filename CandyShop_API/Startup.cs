@@ -33,6 +33,7 @@ namespace CandyShop_API
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IImageRepository, ImageRepository>();
 
             services.AddSwaggerGen(c =>
             {

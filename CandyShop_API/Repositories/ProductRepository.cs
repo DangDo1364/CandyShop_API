@@ -32,7 +32,15 @@ namespace CandyShop_API.Repositories
             _myDBContext.Products.Add(product);
             _myDBContext.SaveChanges();
 
-            return productVM;
+            return new ProductVM
+            {
+                idPro = product.idPro,
+                name = product.name,
+                idCate = product.idCate,
+                price = product.price,
+                discount = product.discount,
+                description = product.description,
+            };
         }
 
         public List<ProductVM> GetAll()
