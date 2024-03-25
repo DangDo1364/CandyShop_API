@@ -1,5 +1,6 @@
 ﻿using CandyShop_API.Data;
 using CandyShop_API.Model;
+using CandyShop_API.ViewModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -80,6 +81,8 @@ namespace CandyShop_API.Repositories
             {
                 cate.name = category.name;
                 _myDBContext.Update(cate);
+                _myDBContext.SaveChanges();
+
 
                 return new CategoryVM
                 {

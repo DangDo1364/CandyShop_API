@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using System.Linq;
 using System;
-using CandyShop_API.Model;
 using System.Collections.Generic;
+using CandyShop_API.ViewModel;
 
 namespace CandyShop_API.Repositories
 {

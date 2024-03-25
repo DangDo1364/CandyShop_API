@@ -1,22 +1,21 @@
-﻿using CandyShop_API.Data;
-using CandyShop_API.Repositories;
+﻿using CandyShop_API.Repositories;
 using CandyShop_API.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Xml.Linq;
 
 namespace CandyShop_API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository)
+        private readonly IProductRepository _productRepository;
+
+        public ProductController(IProductRepository productRepository)
         {
-            _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
         }
 
         [HttpGet]
@@ -24,7 +23,7 @@ namespace CandyShop_API.Controllers
         {
             try
             {
-                return Ok(_categoryRepository.GetAll());
+                return Ok(_productRepository.GetAll());
             }
             catch (System.Exception)
             {
@@ -33,11 +32,24 @@ namespace CandyShop_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(Guid id)
         {
             try
             {
-                return Ok(_categoryRepository.GetByID(id));
+                return Ok(_productRepository.GetByID(id));
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{name}")]
+        public IActionResult GetByName(string name)
+        {
+            try
+            {
+                return Ok(_productRepository.GetByName(name));
             }
             catch (System.Exception)
             {
@@ -46,11 +58,11 @@ namespace CandyShop_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CategoryVM category)
+        public IActionResult Create(ProductVM productVM)
         {
             try
-            {            
-                return Ok(_categoryRepository.Add(category.name));
+            {
+                return Ok(_productRepository.Add(productVM));
             }
             catch (Exception)
             {
@@ -59,14 +71,14 @@ namespace CandyShop_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, CategoryVM category)
+        public IActionResult Update(Guid id, ProductVM productVM)
         {
-            if (id != category.idCate)
+            if (id != productVM.idPro)
                 return BadRequest();
 
             try
             {
-                _categoryRepository.Update(category);
+                _productRepository.Update(productVM);
                 return NoContent();
 
             }

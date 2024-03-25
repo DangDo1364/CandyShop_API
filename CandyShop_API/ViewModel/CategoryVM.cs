@@ -1,4 +1,4 @@
-﻿namespace CandyShop_API.Model
+﻿namespace CandyShop_API.ViewModel
 {
     public class CategoryVM
     {
